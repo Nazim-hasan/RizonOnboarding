@@ -18,24 +18,31 @@ export const FeedbackSheet: React.FC<FeedbackSheetProps> = ({
 }) => {
   const [feedback, setFeedback] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSend = async () => {
     if (isSubmitting) return; // Prevent race conditions
     if (!feedback.trim()) {
-      Alert.alert('Validation', 'Please enter your feedback to proceed.');
+      setError('Please enter your feedback to proceed.');
       return;
     }
 
     setIsSubmitting(true);
+    setError(null);
     try {
       await onSubmit(feedback);
       setFeedback(''); // Reset field
       onClose();
     } catch (error) {
-      Alert.alert('Error', 'Failed to send feedback. Please try again.');
+      setError('Failed to send feedback. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const onChangeText = (text: string) => {
+    setFeedback(text);
+    if (error) setError(null); // Clear error on type
   };
 
   return (
@@ -48,10 +55,14 @@ export const FeedbackSheet: React.FC<FeedbackSheetProps> = ({
       <RizonInput
         placeholder="Type your feedback here..."
         value={feedback}
-        onChangeText={setFeedback}
+        onChangeText={onChangeText}
         multiline
         numberOfLines={4}
       />
+      
+      {error && (
+        <Text style={styles.errorText}>{error}</Text>
+      )}
 
       <RizonButton 
         title="Send feedback" 
@@ -66,5 +77,11 @@ const styles = StyleSheet.create({
   subtext: {
     marginBottom: spacing.l,
     paddingHorizontal: spacing.m,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 14,
+    marginBottom: spacing.m,
+    fontFamily: 'Helvetica',
   },
 });
