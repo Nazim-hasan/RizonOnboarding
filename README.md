@@ -1,5 +1,7 @@
 # RizonOnboarding
 
+<video src="./demo.mp4" controls></video>
+
 ## Prerequisites
 Ensure your environment meets the following requirements before building the project:
 
