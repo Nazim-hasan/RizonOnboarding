@@ -10,6 +10,7 @@ import {
 import { OnboardingScreen } from './src/presentation/modules/onboarding/OnboardingScreen';
 import { colors } from './src/presentation/theme';
 
+
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
 
