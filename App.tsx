@@ -19,9 +19,6 @@ function App(): React.JSX.Element {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={colors.background}
       />
-      <View style={styles.content}>
-        <Text style={styles.mockContent}>Main App Content</Text>
-      </View>
       <OnboardingScreen />
     </SafeAreaView>
   );

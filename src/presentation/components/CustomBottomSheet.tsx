@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Modal from 'react-native-modal';
 import { colors, spacing } from '../theme';
 
 interface CustomBottomSheetProps {
   isVisible: boolean;
   onClose?: () => void;
+  onModalHide?: () => void;
   children: React.ReactNode;
 }
 
@@ -14,6 +15,7 @@ const { width } = Dimensions.get('window');
 export const CustomBottomSheet: React.FC<CustomBottomSheetProps> = ({ 
   isVisible, 
   onClose, 
+  onModalHide,
   children 
 }) => {
   return (
@@ -21,15 +23,19 @@ export const CustomBottomSheet: React.FC<CustomBottomSheetProps> = ({
       isVisible={isVisible}
       onBackdropPress={onClose}
       onBackButtonPress={onClose}
+      onModalHide={onModalHide}
+      avoidKeyboard
       style={styles.modal}
       backdropOpacity={0.5}
       useNativeDriver
       hideModalContentWhileAnimating
     >
-      <View style={styles.container}>
-        <View style={styles.handle} />
-        {children}
-      </View>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.container}>
+          <View style={styles.handle} />
+          {children}
+        </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
@@ -49,10 +55,11 @@ const styles = StyleSheet.create({
     width: width,
   },
   handle: {
-    width: 40,
+    width: 32,
     height: 4,
     backgroundColor: '#E5E5E5',
     borderRadius: 2,
     marginBottom: spacing.l,
+    alignSelf: 'center',
   },
 });

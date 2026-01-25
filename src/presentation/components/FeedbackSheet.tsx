@@ -21,7 +21,10 @@ export const FeedbackSheet: React.FC<FeedbackSheetProps> = ({
 
   const handleSend = async () => {
     if (isSubmitting) return; // Prevent race conditions
-    if (!feedback.trim()) return;
+    if (!feedback.trim()) {
+      Alert.alert('Validation', 'Please enter your feedback to proceed.');
+      return;
+    }
 
     setIsSubmitting(true);
     try {

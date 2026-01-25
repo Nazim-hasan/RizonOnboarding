@@ -17,6 +17,7 @@ export const spacing = {
 
 export const typography = {
   header: {
+    fontFamily: 'Helvetica',
     fontSize: 24,
     fontWeight: '600' as '600',
     color: colors.textPrimary,
@@ -24,6 +25,7 @@ export const typography = {
     marginBottom: 8,
   },
   body: {
+    fontFamily: 'Helvetica',
     fontSize: 16,
     color: colors.textSecondary,
     textAlign: 'center' as 'center',

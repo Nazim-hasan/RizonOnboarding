@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   multilineInput: {
-    minHeight: 100,
+    minHeight: 60,
   },
 });

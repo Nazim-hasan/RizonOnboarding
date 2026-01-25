@@ -11,4 +11,10 @@ export class MockOnboardingRepository implements OnboardingRepository {
       isJustFinished: true
     };
   }
+
+  async submitFeedback(feedback: string): Promise<void> {
+    console.log('Mock submitting feedback:', feedback);
+    // Simulate network delay
+    await new Promise<void>(resolve => setTimeout(() => resolve(), 1000));
+  }
 }

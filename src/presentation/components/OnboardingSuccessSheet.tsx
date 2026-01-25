@@ -8,18 +8,24 @@ interface OnboardingSuccessSheetProps {
   isVisible: boolean;
   onNegative: () => void;
   onPositive: () => void;
+  onModalHide?: () => void;
 }
 
 export const OnboardingSuccessSheet: React.FC<OnboardingSuccessSheetProps> = ({ 
   isVisible, 
   onNegative, 
-  onPositive 
+  onPositive,
+  onModalHide
 }) => {
   return (
-    <CustomBottomSheet isVisible={isVisible}>
+    <CustomBottomSheet isVisible={isVisible} onModalHide={onModalHide}>
       {/* Mock logo area */}
       <View style={styles.logoContainer}>
-        <Text style={styles.logoText}>RIZON</Text>
+        <Image 
+          source={require('../../assets/images/rizon.png')} 
+          style={styles.logoImage}
+          resizeMode="contain"
+        />
       </View>
 
       <Text style={typography.header}>Enjoying Rizon so far?</Text>
@@ -58,10 +64,9 @@ const styles = StyleSheet.create({
     marginBottom: spacing.l,
     borderRadius: 8,
   },
-  logoText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#000',
+  logoImage: {
+    width: 80,
+    height: 80,
   },
   subtext: {
     marginBottom: spacing.xl,
