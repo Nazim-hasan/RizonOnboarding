@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, Pressable } from 'react-native';
 import { CustomBottomSheet } from '../components/CustomBottomSheet';
 import { RizonButton } from '../components/RizonButton';
 import { colors, spacing, typography } from '../theme';
@@ -49,7 +49,34 @@ export const OnboardingSuccessSheet: React.FC<OnboardingSuccessSheetProps> = ({
             onPress={onPositive} 
           />
         </View>
+        
       </View>
+      <View style={{
+        paddingTop: 20
+      }}>
+        <RizonButton 
+            title="Click me" 
+            variant="primary" 
+            // onPress={onPositive} 
+            wrapperStyle={{
+              backgroundColor: 'gray'
+            }}
+            customTextStyle={{
+              color: 'black'
+            }}
+            disabled
+          />
+      </View>
+      {/* <Pressable  style={{
+          backgroundColor: 'black',
+          padding: 10,
+          borderRadius: 10,
+
+        }}>
+          <Text style={{
+
+          }}>Click me</Text>
+        </Pressable> */}
     </CustomBottomSheet>
   );
 };
