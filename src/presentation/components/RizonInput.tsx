@@ -1,21 +1,19 @@
 import React from 'react';
-import { TextInput, StyleSheet, View } from 'react-native';
+import { TextInput, StyleSheet, View, TextInputProps } from 'react-native';
 import { colors, spacing } from '../theme';
 
-interface RizonInputProps {
-  placeholder?: string;
+interface RizonInputProps extends TextInputProps {
   value: string;
   onChangeText: (text: string) => void;
-  multiline?: boolean;
-  numberOfLines?: number;
 }
 
-export const RizonInput: React.FC<RizonInputProps> = ({ 
-  placeholder, 
-  value, 
+export const RizonInput: React.FC<RizonInputProps> = ({
+  placeholder,
+  value,
   onChangeText,
   multiline = false,
   numberOfLines = 1,
+  ...props
 }) => {
   return (
     <View style={styles.container}>
@@ -28,6 +26,7 @@ export const RizonInput: React.FC<RizonInputProps> = ({
         multiline={multiline}
         numberOfLines={numberOfLines}
         textAlignVertical={multiline ? 'top' : 'center'}
+        {...props}
       />
     </View>
   );

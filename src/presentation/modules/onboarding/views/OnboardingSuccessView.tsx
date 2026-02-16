@@ -6,13 +6,15 @@ interface OnboardingSuccessViewProps {
   onNegative: () => void;
   onPositive: () => void;
   onModalHide?: () => void;
+  onClose?: () => void;
 }
 
-export const OnboardingSuccessView: React.FC<OnboardingSuccessViewProps> = ({ 
-  isVisible, 
-  onNegative, 
+export const OnboardingSuccessView: React.FC<OnboardingSuccessViewProps> = ({
+  isVisible,
+  onNegative,
   onPositive,
-  onModalHide
+  onModalHide,
+  onClose
 }) => {
   return (
     <OnboardingSuccessSheet
@@ -20,6 +22,7 @@ export const OnboardingSuccessView: React.FC<OnboardingSuccessViewProps> = ({
       onNegative={onNegative}
       onPositive={onPositive}
       onModalHide={onModalHide}
+      onClose={onClose}
     />
   );
 };

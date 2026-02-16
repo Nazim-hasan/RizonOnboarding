@@ -7,11 +7,14 @@ interface RizonButtonProps {
   onPress: () => void;
   variant?: 'primary' | 'secondary';
   loading?: boolean;
+  wrapperStyle?: any;
+  customTextStyle?: any;
+  disabled?: boolean;
 }
 
-export const RizonButton: React.FC<RizonButtonProps> = ({ 
-  title, 
-  onPress, 
+export const RizonButton: React.FC<RizonButtonProps> = ({
+  title,
+  onPress,
   variant = 'primary',
   loading = false,
   wrapperStyle,
@@ -19,14 +22,14 @@ export const RizonButton: React.FC<RizonButtonProps> = ({
   disabled
 }) => {
   const isPrimary = variant === 'primary';
-  
+
   return (
-    <TouchableOpacity 
+    <TouchableOpacity
       style={[
-        styles.container, 
+        styles.container,
         isPrimary ? styles.primaryContainer : styles.secondaryContainer,
         wrapperStyle
-      ]} 
+      ]}
       onPress={onPress}
       disabled={disabled || loading}
     >
@@ -34,7 +37,7 @@ export const RizonButton: React.FC<RizonButtonProps> = ({
         <ActivityIndicator color={isPrimary ? '#FFF' : '#000'} />
       ) : (
         <Text style={[
-          styles.text, 
+          styles.text,
           isPrimary ? styles.primaryText : styles.secondaryText,
           customTextStyle
         ]}>

@@ -13,18 +13,19 @@ export const OnboardingScreen = () => {
   const repository = useMemo(() => new MockOnboardingRepository(), []);
   const getStatusUseCase = useMemo(() => new GetOnboardingStatusUseCase(repository), [repository]);
   const submitFeedbackUseCase = useMemo(() => new SubmitFeedbackUseCase(repository), [repository]);
-  
-  const { 
-    step, 
-    isLoading, 
-    onNegativeFeedback, 
+
+  const {
+    step,
+    isLoading,
+    onNegativeFeedback,
     onPositiveFeedback,
     submitFeedback,
     closeFeedback,
     handleReview,
     closeAppStore,
     onSuccessSheetHide,
-    openOnboarding
+    openOnboarding,
+    handleDismiss
   } = useOnboardingController(getStatusUseCase, submitFeedbackUseCase);
 
   if (isLoading) {
@@ -42,7 +43,7 @@ export const OnboardingScreen = () => {
         <View style={styles.avatar} />
         <Text style={styles.greeting}>Good evening, Alex</Text>
       </View>
-      
+
       <View style={styles.balanceCard}>
         <Text style={styles.balanceLabel}>Total Balance</Text>
         <Text style={styles.balanceAmount}>$12,450.00</Text>
@@ -71,13 +72,13 @@ export const OnboardingScreen = () => {
       </TouchableOpacity>
 
       {/* Modals */}
-      <OnboardingSuccessView 
+      <OnboardingSuccessView
         isVisible={step === 'success'}
         onNegative={onNegativeFeedback}
         onPositive={onPositiveFeedback}
         onModalHide={onSuccessSheetHide}
       />
-      
+
       <FeedbackView
         isVisible={step === 'feedback'}
         onClose={closeFeedback}

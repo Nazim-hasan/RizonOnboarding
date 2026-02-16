@@ -9,20 +9,22 @@ interface OnboardingSuccessSheetProps {
   onNegative: () => void;
   onPositive: () => void;
   onModalHide?: () => void;
+  onClose?: () => void;
 }
 
-export const OnboardingSuccessSheet: React.FC<OnboardingSuccessSheetProps> = ({ 
-  isVisible, 
-  onNegative, 
+export const OnboardingSuccessSheet: React.FC<OnboardingSuccessSheetProps> = ({
+  isVisible,
+  onNegative,
   onPositive,
-  onModalHide
+  onModalHide,
+  onClose
 }) => {
   return (
-    <CustomBottomSheet isVisible={isVisible} onModalHide={onModalHide}>
+    <CustomBottomSheet isVisible={isVisible} onModalHide={onModalHide} onClose={onClose}>
       {/* Mock logo area */}
       <View style={styles.logoContainer}>
-        <Image 
-          source={require('../../assets/images/rizon.png')} 
+        <Image
+          source={require('../../assets/images/rizon.png')}
           style={styles.logoImage}
           resizeMode="contain"
         />
@@ -35,48 +37,22 @@ export const OnboardingSuccessSheet: React.FC<OnboardingSuccessSheetProps> = ({
 
       <View style={styles.buttonContainer}>
         <View style={styles.buttonWrapper}>
-          <RizonButton 
-            title="Not yet" 
-            variant="secondary" 
-            onPress={onNegative} 
+          <RizonButton
+            title="Not yet"
+            variant="secondary"
+            onPress={onNegative}
           />
         </View>
         <View style={styles.spacer} />
         <View style={styles.buttonWrapper}>
-          <RizonButton 
-            title="Yes, loving it" 
-            variant="primary" 
-            onPress={onPositive} 
+          <RizonButton
+            title="Yes, loving it"
+            variant="primary"
+            onPress={onPositive}
           />
         </View>
-        
-      </View>
-      <View style={{
-        paddingTop: 20
-      }}>
-        <RizonButton 
-            title="Click me" 
-            variant="primary" 
-            // onPress={onPositive} 
-            wrapperStyle={{
-              backgroundColor: 'gray'
-            }}
-            customTextStyle={{
-              color: 'black'
-            }}
-            disabled
-          />
-      </View>
-      {/* <Pressable  style={{
-          backgroundColor: 'black',
-          padding: 10,
-          borderRadius: 10,
 
-        }}>
-          <Text style={{
-
-          }}>Click me</Text>
-        </Pressable> */}
+      </View>
     </CustomBottomSheet>
   );
 };

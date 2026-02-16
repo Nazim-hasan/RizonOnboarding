@@ -1,8 +1,10 @@
+
 import { useEffect, useState } from "react";
 import { Platform, Linking } from "react-native";
 import { GetOnboardingStatusUseCase } from "../../../../domain/usecases/GetOnboardingStatusUseCase";
 import { OnboardingStep } from "../OnboardingModel";
 import { SubmitFeedbackUseCase } from "../../../../domain/usecases/SubmitFeedbackUseCase";
+import { AuthStore } from "../../../../data/store/AuthStore";
 
 export const useOnboardingController = (
   getOnboardingStatusUseCase: GetOnboardingStatusUseCase,
@@ -47,14 +49,16 @@ export const useOnboardingController = (
     try {
       await submitFeedbackUseCase.execute(feedback);
       setStep('idle'); // Close sheet on success
+      AuthStore.setHasSeenOnboarding(true); // Mark as done
     } catch (error) {
       console.error('Failed to submit feedback', error);
-      throw error; 
+      throw error;
     }
   };
 
   const closeFeedback = () => {
     setStep('idle');
+    AuthStore.setHasSeenOnboarding(true); // Mark as done even if skipped/closed
   };
 
   const handleReview = () => {
@@ -70,12 +74,19 @@ export const useOnboardingController = (
         console.log("Don't know how to open URI: " + url);
       }
     }).catch(err => console.error('An error occurred', err));
-    
+
     setStep('idle');
+    AuthStore.setHasSeenOnboarding(true); // Mark as done
   };
 
   const closeAppStore = () => {
     setStep('idle');
+    AuthStore.setHasSeenOnboarding(true); // Mark as done
+  };
+
+  const handleDismiss = () => {
+    setStep('idle');
+    AuthStore.setHasSeenOnboarding(true); // Mark as done if dismissed
   };
 
   // Called by OnboardingSuccessView.onModalHide
@@ -102,5 +113,6 @@ export const useOnboardingController = (
     closeAppStore,
     onSuccessSheetHide,
     openOnboarding,
+    handleDismiss
   };
 };
